@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84059C8B2752056F009296AC /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C8A275204DF009296AC /* ColorButton.swift */; };
 		84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */; };
-		84A87B312751E89D0015862E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B302751E89D0015862E /* ContentView.swift */; };
+		84A87B312751E89D0015862E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B302751E89D0015862E /* SettingsView.swift */; };
 		84A87B332751E8A00015862E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A87B322751E8A00015862E /* Assets.xcassets */; };
 		84A87B362751E8A00015862E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A87B352751E8A00015862E /* Preview Assets.xcassets */; };
 		84A87B382751E8A00015862E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B372751E8A00015862E /* Persistence.swift */; };
-		84A87B3B2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B392751E8A00015862E /* NetworkSpeedMonitor.xcdatamodeld */; };
+		84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B392751E8A00015862E /* SessionData.xcdatamodeld */; };
+		84A87B432751E8E20015862E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B422751E8E20015862E /* SettingsViewModel.swift */; };
+		84A87B482751ED360015862E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B472751ED360015862E /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		84059C8A275204DF009296AC /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		84A87B2B2751E89D0015862E /* NetworkSpeedMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkSpeedMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSpeedMonitorApp.swift; sourceTree = "<group>"; };
-		84A87B302751E89D0015862E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		84A87B302751E89D0015862E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		84A87B322751E8A00015862E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84A87B352751E8A00015862E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		84A87B372751E8A00015862E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		84A87B3A2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetworkSpeedMonitor.xcdatamodel; sourceTree = "<group>"; };
 		84A87B3C2751E8A00015862E /* NetworkSpeedMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetworkSpeedMonitor.entitlements; sourceTree = "<group>"; };
+		84A87B422751E8E20015862E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		84A87B472751ED360015862E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84059C89275204CF009296AC /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				84059C8A275204DF009296AC /* ColorButton.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
 		84A87B222751E89D0015862E = {
 			isa = PBXGroup;
 			children = (
@@ -57,11 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */,
-				84A87B302751E89D0015862E /* ContentView.swift */,
+				84A87B452751E92C0015862E /* Views */,
+				84A87B462751E9370015862E /* ViewModels */,
+				84A87B442751E91C0015862E /* Data */,
 				84A87B322751E8A00015862E /* Assets.xcassets */,
-				84A87B372751E8A00015862E /* Persistence.swift */,
 				84A87B3C2751E8A00015862E /* NetworkSpeedMonitor.entitlements */,
-				84A87B392751E8A00015862E /* NetworkSpeedMonitor.xcdatamodeld */,
 				84A87B342751E8A00015862E /* Preview Content */,
 			);
 			path = NetworkSpeedMonitor;
@@ -73,6 +87,33 @@
 				84A87B352751E8A00015862E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		84A87B442751E91C0015862E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				84A87B372751E8A00015862E /* Persistence.swift */,
+				84A87B472751ED360015862E /* DataModel.swift */,
+				84A87B392751E8A00015862E /* SessionData.xcdatamodeld */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		84A87B452751E92C0015862E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84A87B302751E89D0015862E /* SettingsView.swift */,
+				84059C89275204CF009296AC /* Reusable */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		84A87B462751E9370015862E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				84A87B422751E8E20015862E /* SettingsViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +187,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A87B382751E8A00015862E /* Persistence.swift in Sources */,
-				84A87B312751E89D0015862E /* ContentView.swift in Sources */,
-				84A87B3B2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodeld in Sources */,
+				84A87B312751E89D0015862E /* SettingsView.swift in Sources */,
+				84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */,
+				84059C8B2752056F009296AC /* ColorButton.swift in Sources */,
+				84A87B482751ED360015862E /* DataModel.swift in Sources */,
 				84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */,
+				84A87B432751E8E20015862E /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,13 +392,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		84A87B392751E8A00015862E /* NetworkSpeedMonitor.xcdatamodeld */ = {
+		84A87B392751E8A00015862E /* SessionData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				84A87B3A2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodel */,
 			);
 			currentVersion = 84A87B3A2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodel */;
-			path = NetworkSpeedMonitor.xcdatamodeld;
+			path = SessionData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

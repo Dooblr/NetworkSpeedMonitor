@@ -13,7 +13,9 @@ struct NetworkSpeedMonitorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SettingsView()
+                .environmentObject(SettingsViewModel())
+//                .environmentObject(DataModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
