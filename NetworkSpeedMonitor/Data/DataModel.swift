@@ -5,13 +5,12 @@
 //  Created by admin on 11/26/21.
 //
 
-import Foundation
 import CoreData
 import SwiftUI
 
 class DataModel: ObservableObject {
     
-    let container = NSPersistentContainer(name: "SessionData")
+    let container = PersistenceController.shared.container
     @Published var savedEntities: [SessionEntity] = []
     
     init(){
@@ -35,22 +34,45 @@ class DataModel: ObservableObject {
         }
     }
     
-    func addItem() {
-        
+    func addItem(speedCollection:[Date:Float], speedExpected:Float) {
+
+        // Create a new CoreData entity
         let newItem = SessionEntity(context: container.viewContext)
         
-        newItem.averageSpeed = 0
+        // Set the expected speed for the session
+        newItem.speedExpected = speedExpected
+        
+        // Set the [Date:Float] network speeds dict for CoreData entry
+        newItem.speedCollection = speedCollection
+        
+        // Average all values in passed networkSpeeds
+        var networkSpeedsArray:[Float] = []
+        for (_,value) in speedCollection {
+            networkSpeedsArray.append(value)
+        }
+        let networkSpeedAverage = HelperFuctions.arrayAverage(networkSpeedsArray)
+        // Set entity's network speed average
+        newItem.speedAverage = networkSpeedAverage
 
+        // Save data and re-fetch
         DispatchQueue.main.async {
             self.saveData()
         }
-        
     }
 
-    func deleteItems(offsets: IndexSet) {
-        guard let index = offsets.first else { return }
-        let entity = savedEntities[index]
-        container.viewContext.delete(entity)
+    func deleteItems(id: ObjectIdentifier) {
+        for entity in savedEntities {
+            if entity.id == id {
+                container.viewContext.delete(entity)
+            }
+        }
+        saveData()
+    }
+    
+    func deleteAll() {
+        for entity in savedEntities {
+            container.viewContext.delete(entity)
+        }
         saveData()
     }
     

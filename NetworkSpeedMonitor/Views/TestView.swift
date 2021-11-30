@@ -8,9 +8,9 @@
 import SwiftUI
 import CoreData
 
-struct SettingsView: View {
+struct TestView: View {
 
-    @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @EnvironmentObject var settingsViewModel: TestViewModel
     
     var body: some View {
         
@@ -26,16 +26,17 @@ struct SettingsView: View {
                     HStack {
                         TextField("",
                               text: Binding(
-                                get: { String(settingsViewModel.expectedSpeed) },
-                                set: { settingsViewModel.expectedSpeed = Int($0) ?? 100 }
+                                get: { String(settingsViewModel.speedExpected) },
+                                set: { settingsViewModel.speedExpected = Int($0) ?? 100 }
                         ))
                             .frame(width: 50, height: nil)
                             .textFieldStyle(.roundedBorder)
-                            .multilineTextAlignment(.leading)
+                            .multilineTextAlignment(.center)
+                            .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
                         Text("Megabits/s")
                     }
                 }
-                .padding([.leading, .bottom])
+                .padding([.leading])
                 
                 Group {
                     Text("Test Duration:")
@@ -47,11 +48,12 @@ struct SettingsView: View {
                         ))
                             .frame(width: 50, height: nil)
                             .textFieldStyle(.roundedBorder)
-                            .multilineTextAlignment(.leading)
+                            .multilineTextAlignment(.center)
+                            .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
                         Text("Hours")
                     }
                 }
-                .padding([.leading, .bottom])
+                .padding([.leading])
                 
                 
                 
@@ -62,7 +64,7 @@ struct SettingsView: View {
                     let rounded = String(format:"%.2f", settingsViewModel.networkAverage!)
                     Text("\(rounded) Megabits/s")
                         .font(.title2)
-                        .padding()
+                        .padding(5)
                     
                     Divider()
                 } else {
@@ -70,16 +72,15 @@ struct SettingsView: View {
                     
                     Text("Average Speed:")
                     
-                    if settingsViewModel.networkSpeeds == [:] && settingsViewModel.sessionIsRunning == true {
+                    if settingsViewModel.speedCollection == [:] && settingsViewModel.sessionIsRunning == true {
                         Text("Starting first test...")
                             .font(.title2)
-                            .padding()
+                            .padding(5)
                     } else {
-                        Text("Click start to begin testing")
+                        Text("Press start to begin testing")
                             .font(.title2)
-                            .padding()
+                            .padding(5)
                     }
-                        
                     
                     Divider()
                 }
@@ -89,16 +90,14 @@ struct SettingsView: View {
                     Button {
                         settingsViewModel.runTest()
                     } label: {
-                        
+                        // Ternary operator for setting text while running
                         Text((settingsViewModel.sessionIsRunning == false) ? "Start" : "Running")
-                            .opacity((settingsViewModel.sessionIsRunning == false) ? 1 : 0.33)
-                            .disabled((settingsViewModel.sessionIsRunning == false) ? false : true)
                     }
-//                    .foregroundColor(.white)
-                    .padding()
-//                    .background(Color.accentColor)
-//                    .cornerRadius(8)
+                        .padding()
+                        // Start button is disabled while running
+                        .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
                     
+                    // Show a progress view while session is running
                     if settingsViewModel.sessionIsRunning == true {
                         ProgressView()
                     }

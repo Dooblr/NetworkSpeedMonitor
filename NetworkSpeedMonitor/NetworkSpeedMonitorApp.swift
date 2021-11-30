@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-@main
-struct NetworkSpeedMonitorApp: App {
-    let persistenceController = PersistenceController.shared
-
-    var body: some Scene {
-        WindowGroup {
-            SettingsView()
-                .environmentObject(SettingsViewModel())
+//@main
+//struct NetworkSpeedMonitorApp: App {
+//    let persistenceController = PersistenceController.shared
+//
+//    var body: some Scene {
+//        WindowGroup {
+//            TestView()
+//                .environmentObject(TestViewModel())
 //                .environmentObject(DataModel())
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-        }
-    }
-}
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//        }
+//    }
+//}

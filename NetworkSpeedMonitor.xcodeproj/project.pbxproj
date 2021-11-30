@@ -7,29 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		84059C8B2752056F009296AC /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C8A275204DF009296AC /* ColorButton.swift */; };
+		84059C9027531D99009296AC /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C8F27531D99009296AC /* StatusBarController.swift */; };
+		84059C92275320A3009296AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C91275320A3009296AC /* AppDelegate.swift */; };
+		84059C94275324C7009296AC /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C93275324C7009296AC /* EventMonitor.swift */; };
+		84059C9727532614009296AC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C9627532614009296AC /* MainViewController.swift */; };
+		84059C9827532852009296AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84059C9527532611009296AC /* Main.storyboard */; };
+		84059C9C27533095009296AC /* TabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C9B27533095009296AC /* TabContainerView.swift */; };
 		84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */; };
-		84A87B312751E89D0015862E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B302751E89D0015862E /* SettingsView.swift */; };
+		84A87B312751E89D0015862E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B302751E89D0015862E /* TestView.swift */; };
 		84A87B332751E8A00015862E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A87B322751E8A00015862E /* Assets.xcassets */; };
 		84A87B362751E8A00015862E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A87B352751E8A00015862E /* Preview Assets.xcassets */; };
-		84A87B382751E8A00015862E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B372751E8A00015862E /* Persistence.swift */; };
+		84A87B382751E8A00015862E /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B372751E8A00015862E /* PersistenceController.swift */; };
 		84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B392751E8A00015862E /* SessionData.xcdatamodeld */; };
-		84A87B432751E8E20015862E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B422751E8E20015862E /* SettingsViewModel.swift */; };
+		84A87B432751E8E20015862E /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B422751E8E20015862E /* TestViewModel.swift */; };
 		84A87B482751ED360015862E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B472751ED360015862E /* DataModel.swift */; };
+		84EE90DE27533C480028F5FA /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DD27533C480028F5FA /* HelperFunctions.swift */; };
+		84EE90E027533D480028F5FA /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DF27533D480028F5FA /* SessionView.swift */; };
+		84FB799427559A7D002BEC96 /* ExportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB799327559A7D002BEC96 /* ExportDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		84059C8A275204DF009296AC /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		84059C8E27531D4A009296AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		84059C8F27531D99009296AC /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		84059C91275320A3009296AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		84059C93275324C7009296AC /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		84059C9527532611009296AC /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		84059C9627532614009296AC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		84059C9B27533095009296AC /* TabContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerView.swift; sourceTree = "<group>"; };
 		84A87B2B2751E89D0015862E /* NetworkSpeedMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkSpeedMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSpeedMonitorApp.swift; sourceTree = "<group>"; };
-		84A87B302751E89D0015862E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		84A87B302751E89D0015862E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		84A87B322751E8A00015862E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84A87B352751E8A00015862E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		84A87B372751E8A00015862E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		84A87B372751E8A00015862E /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		84A87B3A2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetworkSpeedMonitor.xcdatamodel; sourceTree = "<group>"; };
 		84A87B3C2751E8A00015862E /* NetworkSpeedMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetworkSpeedMonitor.entitlements; sourceTree = "<group>"; };
-		84A87B422751E8E20015862E /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		84A87B422751E8E20015862E /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
 		84A87B472751ED360015862E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		84EE90DD27533C480028F5FA /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		84EE90DF27533D480028F5FA /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
+		84FB799327559A7D002BEC96 /* ExportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,12 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84059C89275204CF009296AC /* Reusable */ = {
+		84059C9A27532B1F009296AC /* Status Bar */ = {
 			isa = PBXGroup;
 			children = (
-				84059C8A275204DF009296AC /* ColorButton.swift */,
+				84059C8F27531D99009296AC /* StatusBarController.swift */,
+				84059C93275324C7009296AC /* EventMonitor.swift */,
+				84059C9527532611009296AC /* Main.storyboard */,
+				84059C9627532614009296AC /* MainViewController.swift */,
 			);
-			path = Reusable;
+			path = "Status Bar";
 			sourceTree = "<group>";
 		};
 		84A87B222751E89D0015862E = {
@@ -71,11 +91,15 @@
 			isa = PBXGroup;
 			children = (
 				84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */,
+				84059C91275320A3009296AC /* AppDelegate.swift */,
 				84A87B452751E92C0015862E /* Views */,
 				84A87B462751E9370015862E /* ViewModels */,
 				84A87B442751E91C0015862E /* Data */,
+				84059C9A27532B1F009296AC /* Status Bar */,
+				84EE90DC27533C280028F5FA /* Helper Functions */,
 				84A87B322751E8A00015862E /* Assets.xcassets */,
 				84A87B3C2751E8A00015862E /* NetworkSpeedMonitor.entitlements */,
+				84059C8E27531D4A009296AC /* Info.plist */,
 				84A87B342751E8A00015862E /* Preview Content */,
 			);
 			path = NetworkSpeedMonitor;
@@ -92,8 +116,8 @@
 		84A87B442751E91C0015862E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				84A87B372751E8A00015862E /* Persistence.swift */,
 				84A87B472751ED360015862E /* DataModel.swift */,
+				84A87B372751E8A00015862E /* PersistenceController.swift */,
 				84A87B392751E8A00015862E /* SessionData.xcdatamodeld */,
 			);
 			path = Data;
@@ -102,8 +126,9 @@
 		84A87B452751E92C0015862E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				84A87B302751E89D0015862E /* SettingsView.swift */,
-				84059C89275204CF009296AC /* Reusable */,
+				84059C9B27533095009296AC /* TabContainerView.swift */,
+				84A87B302751E89D0015862E /* TestView.swift */,
+				84EE90DF27533D480028F5FA /* SessionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -111,9 +136,18 @@
 		84A87B462751E9370015862E /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				84A87B422751E8E20015862E /* SettingsViewModel.swift */,
+				84A87B422751E8E20015862E /* TestViewModel.swift */,
+				84FB799327559A7D002BEC96 /* ExportDataModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		84EE90DC27533C280028F5FA /* Helper Functions */ = {
+			isa = PBXGroup;
+			children = (
+				84EE90DD27533C480028F5FA /* HelperFunctions.swift */,
+			);
+			path = "Helper Functions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +208,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84059C9827532852009296AC /* Main.storyboard in Resources */,
 				84A87B362751E8A00015862E /* Preview Assets.xcassets in Resources */,
 				84A87B332751E8A00015862E /* Assets.xcassets in Resources */,
 			);
@@ -186,13 +221,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A87B382751E8A00015862E /* Persistence.swift in Sources */,
-				84A87B312751E89D0015862E /* SettingsView.swift in Sources */,
+				84A87B382751E8A00015862E /* PersistenceController.swift in Sources */,
+				84059C9727532614009296AC /* MainViewController.swift in Sources */,
+				84059C94275324C7009296AC /* EventMonitor.swift in Sources */,
+				84FB799427559A7D002BEC96 /* ExportDataModel.swift in Sources */,
+				84059C9027531D99009296AC /* StatusBarController.swift in Sources */,
+				84A87B312751E89D0015862E /* TestView.swift in Sources */,
+				84059C92275320A3009296AC /* AppDelegate.swift in Sources */,
 				84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */,
-				84059C8B2752056F009296AC /* ColorButton.swift in Sources */,
+				84EE90E027533D480028F5FA /* SessionView.swift in Sources */,
+				84EE90DE27533C480028F5FA /* HelperFunctions.swift in Sources */,
 				84A87B482751ED360015862E /* DataModel.swift in Sources */,
 				84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */,
-				84A87B432751E8E20015862E /* SettingsViewModel.swift in Sources */,
+				84059C9C27533095009296AC /* TabContainerView.swift in Sources */,
+				84A87B432751E8E20015862E /* TestViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +370,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkSpeedMonitor/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -355,6 +398,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkSpeedMonitor/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

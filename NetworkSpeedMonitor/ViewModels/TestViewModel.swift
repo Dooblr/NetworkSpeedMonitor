@@ -7,12 +7,14 @@
 
 import Foundation
 
-class SettingsViewModel: ObservableObject {
+class TestViewModel: ObservableObject {
+    
+    let dataModel = DataModel()
     
     // MARK: - Test Settings
     
     // Expected network speed in Mb/s
-    @Published var expectedSpeed = 100
+    @Published var speedExpected = 100
     
     // Mutable timer counter
     var testCount = 0
@@ -28,8 +30,8 @@ class SettingsViewModel: ObservableObject {
     
     // MARK: - Data
     
-    // Array to hold network speeds to be averaged
-    var networkSpeeds:[String:Float] = [:]
+    // Dict to hold network speeds to be averaged with key as a Date
+    var speedCollection:[Date:Float] = [:]
     
     // Current average during test
     @Published var networkAverage:Float?
@@ -42,18 +44,26 @@ class SettingsViewModel: ObservableObject {
     
     var signalStopTest = false
     
+//    var firstTestHasBeenRun = false
+    
     
     // MARK: - Functions
     
     func runTest(){
         
+        // Inform view that test has begun
         self.sessionIsRunning = true
         
+        // Start a timer to run network speed tests
         Timer.scheduledTimer(withTimeInterval: Double(testFrequency), repeats: true) { timer in
             
+            // Stop test if stop signal has been received
             if self.signalStopTest == true {
+                // Kill timer running test
                 timer.invalidate()
+                // Reset stop test signal
                 self.signalStopTest = false
+                // Exit test
                 return
             }
             
@@ -65,16 +75,16 @@ class SettingsViewModel: ObservableObject {
             print("Speed snapshot: \(speedSnapshot) Mb/sec")
             
             // Add speed snapshot to network speeds array
-            self.networkSpeeds.updateValue(speedSnapshot.first!.value, forKey: speedSnapshot.first!.key)
+            self.speedCollection.updateValue(speedSnapshot.first!.value, forKey: speedSnapshot.first!.key)
             
             // Create a new float array to average network speeds
             var tempNetworkSpeeds:[Float] = []
-            for (_,value) in self.networkSpeeds {
+            for (_,value) in self.speedCollection {
                 tempNetworkSpeeds.append(value)
             }
             
             // Average network speeds
-            self.networkAverage = self.arrayAverage(tempNetworkSpeeds)
+            self.networkAverage = HelperFuctions.arrayAverage(tempNetworkSpeeds)
 //            print("Average speed: \(self.networkAverage!) Mb/sec \n")
             
             // End timer and print final result
@@ -88,22 +98,8 @@ class SettingsViewModel: ObservableObject {
         }
     }
     
-    func stopTest(){
-        self.signalStopTest = true
-        self.sessionIsRunning = false
-        self.networkSpeeds = [:]
-    }
-    
-    func arrayAverage(_ floatArray:[Float]) -> Float{
-        let sumArray = floatArray.reduce(0, +)
-        
-        let avgArrayValue = sumArray / Float(floatArray.count)
-        
-        return avgArrayValue
-    }
-    
     // Runs one test and returns a dict of date and speed
-    func testSpeed() -> [String:Float]  {
+    func testSpeed() -> [Date:Float]  {
         
         // Create a dispatch group
         let group = DispatchGroup()
@@ -140,6 +136,34 @@ class SettingsViewModel: ObservableObject {
         
         group.wait()
         
-        return [startTime.description:networkSpeed!]
+        return [startTime:networkSpeed!]
+    }
+    
+    func stopTest(){
+        
+        // Only add a CoreData object if data has been collected
+        if !self.speedCollection.isEmpty {
+            // Create a CoreData entity with the speed collection and expected network speed
+            self.createSession(speedCollection: self.speedCollection,
+                               speedExpected: Float(self.speedExpected))
+        }
+        
+        // Signals the test timer to stop
+        self.signalStopTest = true
+        
+        // Tells view items that session has stopped
+        self.sessionIsRunning = false
+        
+        // Resets the in-memory network speeds
+        self.speedCollection = [:]
+        
+        self.networkAverage = nil
+        
+    }
+    
+    // Creates a CoreData Session with a Dict[Date:Speed/Float]
+    func createSession(speedCollection: [Date:Float], speedExpected:Float) {
+        self.dataModel.addItem(speedCollection: speedCollection,
+                               speedExpected: speedExpected)
     }
 }
