@@ -27,6 +27,8 @@ class TestViewModel: ObservableObject {
     // Seconds between tests
     var testFrequency = 10
     
+    let testURL = "https://upload.wikimedia.org/wikipedia/commons/a/a6/Brandenburger_Tor_abends.jpg"
+    //"https://g.foolcdn.com/image/?url=https%3A//g.foolcdn.com/editorial/images/654166/shiba-inu-shib-doge-dogecoin-token-coin-cryptocurrency-digital-blockchain-technology-invest-getty.jpg&w=2000&op=resize"
     
     // MARK: - Data
     
@@ -43,8 +45,6 @@ class TestViewModel: ObservableObject {
     @Published var sessionIsRunning = false
     
     var signalStopTest = false
-    
-//    var firstTestHasBeenRun = false
     
     
     // MARK: - Functions
@@ -109,7 +109,7 @@ class TestViewModel: ObservableObject {
         var networkSpeed:Float?
         
         // Get url of some data
-        let url = URL(string: "https://g.foolcdn.com/image/?url=https%3A//g.foolcdn.com/editorial/images/654166/shiba-inu-shib-doge-dogecoin-token-coin-cryptocurrency-digital-blockchain-technology-invest-getty.jpg&w=2000&op=resize")
+        let url = URL(string: self.testURL)
         let request = URLRequest(url: url!,
                                  cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData,
                                  timeoutInterval: Double.infinity)
@@ -157,6 +157,7 @@ class TestViewModel: ObservableObject {
         // Resets the in-memory network speeds
         self.speedCollection = [:]
         
+        // Reset published average
         self.networkAverage = nil
         
     }

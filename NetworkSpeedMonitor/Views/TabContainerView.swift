@@ -23,6 +23,8 @@ struct TabContainerView: View {
                     Text("Sessions")
                 }
         }
+//        .frame(width:350, height:800)
+        .frame(minWidth:350, minHeight:500)
     }
 }
 

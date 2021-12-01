@@ -14,7 +14,6 @@ struct TestView: View {
     
     var body: some View {
         
-        
             VStack (alignment: .center) {
                 
                 Text("Speed Test Settings")
@@ -85,7 +84,6 @@ struct TestView: View {
                     Divider()
                 }
                 
-                
                 HStack{
                     Button {
                         settingsViewModel.runTest()
@@ -107,11 +105,11 @@ struct TestView: View {
                     } label: {
                         Text("Stop")
                     }
+                    .disabled((settingsViewModel.sessionIsRunning == false) ? true : false)
                     .padding()
                 }
                 
             }
-            .frame(width:300, height:450)
             .padding()
     }
 }
