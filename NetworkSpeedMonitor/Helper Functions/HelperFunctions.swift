@@ -6,6 +6,30 @@
 //
 
 import Foundation
+import SwiftUI
+
+// Opens a new window on macOS
+extension View {
+    // https://stackoverflow.com/questions/64823492/how-to-open-another-window-in-swiftui-macos
+    @discardableResult
+    func openInWindow(title: String, sender: Any?) -> NSWindow {
+        let controller = NSHostingController(rootView: self)
+        let win = NSWindow(contentViewController: controller)
+        win.contentViewController = controller
+        win.title = title
+        win.makeKeyAndOrderFront(sender)
+        return win
+    }
+    
+    /*
+     Usage:
+     Button("Open 2nd Window") {
+         WindowView().openInWindow(title: "Win View", sender: self)
+     }
+     Close the window:
+     NSApplication.shared.keyWindow?.close()
+     */
+}
 
 struct HelperFuctions {
     

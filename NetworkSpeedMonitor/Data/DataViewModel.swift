@@ -8,7 +8,7 @@
 import CoreData
 import SwiftUI
 
-class DataModel: ObservableObject {
+class DataViewModel: ObservableObject {
     
     let container = PersistenceController.shared.container
     @Published var savedEntities: [SessionEntity] = []
@@ -60,7 +60,7 @@ class DataModel: ObservableObject {
         }
     }
 
-    func deleteItems(id: ObjectIdentifier) {
+    func deleteItem(id: ObjectIdentifier) {
         for entity in savedEntities {
             if entity.id == id {
                 container.viewContext.delete(entity)

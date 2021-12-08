@@ -9,74 +9,108 @@ import SwiftUI
 
 struct SessionView: View {
     
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var dataModel: DataViewModel
     @EnvironmentObject var testModel: TestViewModel
     
     // Toggles delete buttons to "are you sure" before deleting
-    @State var isShowingDeleteAllAlert = false
-    @State var isShowingDeleteSessionAlert = false
+    @State var isShowingDeleteSessionsAlert = false
+//    @State var isShowingDeleteSessionAlert = false
+//    @State var isShowingDeleteHash:Int?
     
+    // Collection of selected items
     @State var selectedSessions:[SessionEntity] = []
     
     var body: some View {
         VStack {
-            // TODO: Why isn't this updating?
-//            if dataModel.savedEntities.isEmpty {
-//                Spacer()
-//                Text("Run a test to view sessions and export data").font(.title3)
-//                Spacer()
-//            } else {
-                List {
-                    ForEach(dataModel.savedEntities, id:\.self) { session in
+            
+            // MARK: - Session List
+            
+            List {
+                ForEach(dataModel.savedEntities, id:\.self) { session in
+                    
+                    let dates = getStartAndEndDates(session: session)
+                    let startDate = dates.startDate
+                    let endDate = dates.endDate
+                    
+                    HStack {
                         
-                        let dates = getStartAndEndDates(session: session)
-                        let startDate = dates.startDate
-                        let endDate = dates.endDate
+                        // Check/Uncheck Circle
+                        if selectedSessions.contains(session) {
+                            Image(systemName: "checkmark.circle.fill").foregroundColor(.accentColor)
+                        } else {
+                            Image(systemName: "circle")
+                        }
                         
-                        HStack {
-                            
-                            if selectedSessions.contains(session) {
-                                Image(systemName: "checkmark.circle.fill").foregroundColor(.accentColor)
+                        // Session Display
+                        VStack (alignment: .leading) {
+                            Text(("Start date: \(startDate)"))
+                            Text(("End date: \(endDate)"))
+                            Text("Average speed: \(String(format:"%.2f",session.speedAverage)) Mb/s")
+                            Text("Expected speed: \(String(format:"%.0f",session.speedExpected)) Mb/s")
+                        }.onTapGesture {
+                            if !selectedSessions.contains(session) {
+                                selectedSessions.append(session)
                             } else {
-                                Image(systemName: "circle")
-                            }
-                            
-                            VStack (alignment: .leading) {
-                                Text(("Start date: \(startDate)"))
-                                Text(("End date: \(endDate)"))
-                                Text("Average speed: \(String(format:"%.2f",session.speedAverage)) Mb/s")
-                                Text("Expected speed: \(String(format:"%.0f",session.speedExpected)) Mb/s")
-                            }.onTapGesture {
-                                if !selectedSessions.contains(session) {
-                                    selectedSessions.append(session)
-                                } else {
-                                    for (index, searchSession) in selectedSessions.enumerated() {
-                                        if searchSession.id == session.id {
-                                            selectedSessions.remove(at: index)
-                                        }
+                                for (index, searchSession) in selectedSessions.enumerated() {
+                                    if searchSession.id == session.id {
+                                        selectedSessions.remove(at: index)
                                     }
                                 }
-                                
                             }
-                            
-                            Spacer()
-
-                            Button {
-                                dataModel.deleteItems(id: session.id)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .cornerRadius(5)
                         }
-                        Divider()
+                        
+                        Spacer()
+                        
+                        /*
+                         if isShowingDeleteSessionAlert == false {
+                             Button {
+                                 isShowingDeleteSessionAlert = true
+                                 isShowingDeleteHash = session.id.hashValue
+                             } label: {
+                                 Image(systemName: "trash")
+                             }
+                             .foregroundColor(.white)
+                             .background(Color.red)
+                             .cornerRadius(5)
+                         } else if isShowingDeleteSessionAlert == true && session.id.hashValue == isShowingDeleteHash {
+                             VStack {
+                                 Button {
+                                     dataModel.deleteItems(id: session.id)
+                                     isShowingDeleteSessionAlert = false
+                                     isShowingDeleteHash = nil
+                                 } label: {
+                                     Text("Confirm Delete?")
+                                 }
+                                 .foregroundColor(.white)
+                                 .background(Color.red)
+                                 .cornerRadius(5)
+                                 Button {
+                                     isShowingDeleteSessionAlert = false
+                                     isShowingDeleteHash = nil
+                                 } label: {
+                                     Text("Cancel")
+                                 }
+                                 .cornerRadius(5)
+                             }
+                         }
+                         */
+                        
                     }
+                    
+                    // Open window to view data graph
+                    Button("Open Graph") {
+                        WindowView().openInWindow(title: "Win View", sender: self)
+                    }
+                    
+                    Divider()
                 }
-//            }
+            }
+           
             
-            HStack {
-                // Export all data to file
+            // MARK: - Buttons
+            
+            VStack {
+                // Export all or selected sessions to file
                 Button {
                     createReportAndSave()
                 } label: {
@@ -90,28 +124,48 @@ struct SessionView: View {
                 // Delete all
                 Group {
                     
-                    if isShowingDeleteAllAlert == false {
+                    // All/Selected delete logic
+                    if isShowingDeleteSessionsAlert == false {
                         Button {
-                            isShowingDeleteAllAlert = true
+                            isShowingDeleteSessionsAlert = true
                         } label: {
-                            Text("Delete all sessions")
-                        }
-                        .foregroundColor(.white)
-                        .background(Color.red)
-                        .cornerRadius(5)
-                    } else {
-                        HStack {
-                            Button {
-                                dataModel.deleteAll()
-                                isShowingDeleteAllAlert = false
-                            } label: {
-                                Text("Are you sure?")
+                            if selectedSessions.isEmpty {
+                                Text("Delete all sessions")
+                            } else {
+                                Text("Delete selected sessions")
                             }
-                            .foregroundColor(.white)
-                            .background(Color.red)
-                            .cornerRadius(5)
+                        }
+                        // Style
+                        .redAlertButton()
+                    } else {
+                        // Confirm delete button
+                        HStack {
+                            if selectedSessions.isEmpty {
+                                Button {
+                                    dataModel.deleteAll()
+                                    isShowingDeleteSessionsAlert = false
+                                } label: {
+                                    Text("Delete All Sessions?")
+                                }
+                                // Style
+                                .redAlertButton()
+                            } else {
+                                Button {
+                                    for item in selectedSessions {
+                                        dataModel.deleteItem(id: item.id)
+                                    }
+//                                    dataModel.deleteAll()
+                                    isShowingDeleteSessionsAlert = false
+                                } label: {
+                                    Text("Delete Selected Sessions?")
+                                }
+                                // Style
+                                .redAlertButton()
+                            }
+                            
+                            // Cancel button
                             Button {
-                                isShowingDeleteAllAlert = false
+                                isShowingDeleteSessionsAlert = false
                             } label: {
                                 Text("Cancel")
                             }
@@ -122,21 +176,21 @@ struct SessionView: View {
             }
             .disabled(dataModel.savedEntities.isEmpty ? true : false)
             .opacity(dataModel.savedEntities.isEmpty ? 0.3 : 1.0)
+        }.onAppear {
+            // Fetches coredata items and updates published sessions to view
+            dataModel.fetchContent()
         }
     }
     
+    // Uses all or selected sessions to create a text file, then open a save dialogue window
     func createReportAndSave() {
         // Create a blank text variable to write to
         var text = ""
         
         // Use all sessions if none are selected, otherwise export the selected sessions
-        var collectionToExport:[SessionEntity]?
-        if selectedSessions.isEmpty {
-            collectionToExport = dataModel.savedEntities
-        } else {
-            collectionToExport = selectedSessions
-        }
+        let collectionToExport:[SessionEntity]? = selectedSessions.isEmpty ? dataModel.savedEntities : selectedSessions
         
+        // Append the export collection to text
         for session in collectionToExport! {
             let dates = getStartAndEndDates(session: session)
             let startDate = dates.startDate

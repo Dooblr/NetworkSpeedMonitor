@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct TabContainerView: View {
+    
+    @EnvironmentObject var testViewModel:TestViewModel
+    
     var body: some View {
         
         TabView {
             TestView()
                 .tabItem {
-//                    Image(systemName: "speedometer")
                     Text("Test")
                     
                 }
             SessionView()
                 .tabItem {
-//                    Image(systemName: "list.bullet.rectangle.fill")
                     Text("Sessions")
                 }
         }
-//        .frame(width:350, height:800)
         .frame(minWidth:350, minHeight:500)
     }
 }

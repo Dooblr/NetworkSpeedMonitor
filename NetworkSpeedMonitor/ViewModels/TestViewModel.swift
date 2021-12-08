@@ -9,7 +9,10 @@ import Foundation
 
 class TestViewModel: ObservableObject {
     
-    let dataModel = DataModel()
+    let dataModel = DataViewModel()
+    
+    // Toggles opening a window
+    @Published var sessionWindowIsOpen = false
     
     // MARK: - Test Settings
     
@@ -44,7 +47,7 @@ class TestViewModel: ObservableObject {
     // Toggle on while running
     @Published var sessionIsRunning = false
     
-    var signalStopTest = false
+    private var signalStopTest = false
     
     
     // MARK: - Functions

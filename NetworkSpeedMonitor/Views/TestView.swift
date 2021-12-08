@@ -10,7 +10,7 @@ import CoreData
 
 struct TestView: View {
 
-    @EnvironmentObject var settingsViewModel: TestViewModel
+    @EnvironmentObject var testViewModel: TestViewModel
     
     var body: some View {
         
@@ -25,13 +25,13 @@ struct TestView: View {
                     HStack {
                         TextField("",
                               text: Binding(
-                                get: { String(settingsViewModel.speedExpected) },
-                                set: { settingsViewModel.speedExpected = Int($0) ?? 100 }
+                                get: { String(testViewModel.speedExpected) },
+                                set: { testViewModel.speedExpected = Int($0) ?? 100 }
                         ))
                             .frame(width: 50, height: nil)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.center)
-                            .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
+                            .disabled((testViewModel.sessionIsRunning == true) ? true : false)
                         Text("Megabits/s")
                     }
                 }
@@ -42,13 +42,13 @@ struct TestView: View {
                     HStack {
                         TextField("",
                               text: Binding(
-                                get: { String(settingsViewModel.hoursToTest) },
-                                set: { settingsViewModel.hoursToTest = Int($0) ?? 24 }
+                                get: { String(testViewModel.hoursToTest) },
+                                set: { testViewModel.hoursToTest = Int($0) ?? 24 }
                         ))
                             .frame(width: 50, height: nil)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.center)
-                            .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
+                            .disabled((testViewModel.sessionIsRunning == true) ? true : false)
                         Text("Hours")
                     }
                 }
@@ -56,11 +56,11 @@ struct TestView: View {
                 
                 
                 
-                if settingsViewModel.networkAverage != nil {
+                if testViewModel.networkAverage != nil {
                     Divider()
                     
                     Text("Average Speed:")
-                    let rounded = String(format:"%.2f", settingsViewModel.networkAverage!)
+                    let rounded = String(format:"%.2f", testViewModel.networkAverage!)
                     Text("\(rounded) Megabits/s")
                         .font(.title2)
                         .padding(5)
@@ -71,7 +71,7 @@ struct TestView: View {
                     
                     Text("Average Speed:")
                     
-                    if settingsViewModel.speedCollection == [:] && settingsViewModel.sessionIsRunning == true {
+                    if testViewModel.speedCollection == [:] && testViewModel.sessionIsRunning == true {
                         Text("Starting first test...")
                             .font(.title2)
                             .padding(5)
@@ -86,26 +86,26 @@ struct TestView: View {
                 
                 HStack{
                     Button {
-                        settingsViewModel.runTest()
+                        testViewModel.runTest()
                     } label: {
                         // Ternary operator for setting text while running
-                        Text((settingsViewModel.sessionIsRunning == false) ? "Start" : "Running")
+                        Text((testViewModel.sessionIsRunning == false) ? "Start" : "Running")
                     }
                         .padding()
                         // Start button is disabled while running
-                        .disabled((settingsViewModel.sessionIsRunning == true) ? true : false)
+                        .disabled((testViewModel.sessionIsRunning == true) ? true : false)
                     
                     // Show a progress view while session is running
-                    if settingsViewModel.sessionIsRunning == true {
+                    if testViewModel.sessionIsRunning == true {
                         ProgressView()
                     }
                     
                     Button {
-                        settingsViewModel.stopTest()
+                        testViewModel.stopTest()
                     } label: {
                         Text("Stop")
                     }
-                    .disabled((settingsViewModel.sessionIsRunning == false) ? true : false)
+                    .disabled((testViewModel.sessionIsRunning == false) ? true : false)
                     .padding()
                 }
                 

@@ -20,7 +20,9 @@
 		84A87B382751E8A00015862E /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B372751E8A00015862E /* PersistenceController.swift */; };
 		84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B392751E8A00015862E /* SessionData.xcdatamodeld */; };
 		84A87B432751E8E20015862E /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B422751E8E20015862E /* TestViewModel.swift */; };
-		84A87B482751ED360015862E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B472751ED360015862E /* DataModel.swift */; };
+		84A87B482751ED360015862E /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B472751ED360015862E /* DataViewModel.swift */; };
+		84BD8027276083170028D06F /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BD8026276083170028D06F /* WindowView.swift */; };
+		84BD802A27609ED50028D06F /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BD802927609ED50028D06F /* Styles.swift */; };
 		84EE90DE27533C480028F5FA /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DD27533C480028F5FA /* HelperFunctions.swift */; };
 		84EE90E027533D480028F5FA /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DF27533D480028F5FA /* SessionView.swift */; };
 		84FB799427559A7D002BEC96 /* ExportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB799327559A7D002BEC96 /* ExportDataModel.swift */; };
@@ -43,7 +45,9 @@
 		84A87B3A2751E8A00015862E /* NetworkSpeedMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetworkSpeedMonitor.xcdatamodel; sourceTree = "<group>"; };
 		84A87B3C2751E8A00015862E /* NetworkSpeedMonitor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetworkSpeedMonitor.entitlements; sourceTree = "<group>"; };
 		84A87B422751E8E20015862E /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
-		84A87B472751ED360015862E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		84A87B472751ED360015862E /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
+		84BD8026276083170028D06F /* WindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowView.swift; sourceTree = "<group>"; };
+		84BD802927609ED50028D06F /* Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
 		84EE90DD27533C480028F5FA /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		84EE90DF27533D480028F5FA /* SessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionView.swift; sourceTree = "<group>"; };
 		84FB799327559A7D002BEC96 /* ExportDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportDataModel.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 				84A87B452751E92C0015862E /* Views */,
 				84A87B462751E9370015862E /* ViewModels */,
 				84A87B442751E91C0015862E /* Data */,
+				84BD802827609EBD0028D06F /* Styles */,
 				84059C9A27532B1F009296AC /* Status Bar */,
 				84EE90DC27533C280028F5FA /* Helper Functions */,
 				84A87B322751E8A00015862E /* Assets.xcassets */,
@@ -116,7 +121,7 @@
 		84A87B442751E91C0015862E /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				84A87B472751ED360015862E /* DataModel.swift */,
+				84A87B472751ED360015862E /* DataViewModel.swift */,
 				84A87B372751E8A00015862E /* PersistenceController.swift */,
 				84A87B392751E8A00015862E /* SessionData.xcdatamodeld */,
 			);
@@ -129,6 +134,7 @@
 				84059C9B27533095009296AC /* TabContainerView.swift */,
 				84A87B302751E89D0015862E /* TestView.swift */,
 				84EE90DF27533D480028F5FA /* SessionView.swift */,
+				84BD8026276083170028D06F /* WindowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -140,6 +146,14 @@
 				84FB799327559A7D002BEC96 /* ExportDataModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		84BD802827609EBD0028D06F /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				84BD802927609ED50028D06F /* Styles.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		84EE90DC27533C280028F5FA /* Helper Functions */ = {
@@ -227,11 +241,13 @@
 				84FB799427559A7D002BEC96 /* ExportDataModel.swift in Sources */,
 				84059C9027531D99009296AC /* StatusBarController.swift in Sources */,
 				84A87B312751E89D0015862E /* TestView.swift in Sources */,
+				84BD8027276083170028D06F /* WindowView.swift in Sources */,
 				84059C92275320A3009296AC /* AppDelegate.swift in Sources */,
 				84A87B3B2751E8A00015862E /* SessionData.xcdatamodeld in Sources */,
 				84EE90E027533D480028F5FA /* SessionView.swift in Sources */,
 				84EE90DE27533C480028F5FA /* HelperFunctions.swift in Sources */,
-				84A87B482751ED360015862E /* DataModel.swift in Sources */,
+				84BD802A27609ED50028D06F /* Styles.swift in Sources */,
+				84A87B482751ED360015862E /* DataViewModel.swift in Sources */,
 				84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */,
 				84059C9C27533095009296AC /* TabContainerView.swift in Sources */,
 				84A87B432751E8E20015862E /* TestViewModel.swift in Sources */,

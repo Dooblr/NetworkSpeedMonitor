@@ -5,18 +5,21 @@
 //  Created by admin on 11/26/21.
 //
 
-import SwiftUI
-
+//import SwiftUI
+//
 //@main
 //struct NetworkSpeedMonitorApp: App {
-//    let persistenceController = PersistenceController.shared
+////    let persistenceController = PersistenceController.shared
+//    
+//    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 //
 //    var body: some Scene {
 //        WindowGroup {
-//            TestView()
-//                .environmentObject(TestViewModel())
-//                .environmentObject(DataModel())
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+//            WindowView()
+////            TabContainerView()
+////                .environmentObject(TestViewModel())
+////                .environmentObject(DataModel())
+////                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 //        }
 //    }
 //}
