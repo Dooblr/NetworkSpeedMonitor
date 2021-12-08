@@ -61,48 +61,26 @@ struct SessionView: View {
                         
                         Spacer()
                         
-                        /*
-                         if isShowingDeleteSessionAlert == false {
-                             Button {
-                                 isShowingDeleteSessionAlert = true
-                                 isShowingDeleteHash = session.id.hashValue
-                             } label: {
-                                 Image(systemName: "trash")
-                             }
-                             .foregroundColor(.white)
-                             .background(Color.red)
-                             .cornerRadius(5)
-                         } else if isShowingDeleteSessionAlert == true && session.id.hashValue == isShowingDeleteHash {
-                             VStack {
-                                 Button {
-                                     dataModel.deleteItems(id: session.id)
-                                     isShowingDeleteSessionAlert = false
-                                     isShowingDeleteHash = nil
-                                 } label: {
-                                     Text("Confirm Delete?")
-                                 }
-                                 .foregroundColor(.white)
-                                 .background(Color.red)
-                                 .cornerRadius(5)
-                                 Button {
-                                     isShowingDeleteSessionAlert = false
-                                     isShowingDeleteHash = nil
-                                 } label: {
-                                     Text("Cancel")
-                                 }
-                                 .cornerRadius(5)
-                             }
-                         }
-                         */
-                        
                     }
                     
-                    // Open window to view data graph
-                    Button("Open Graph") {
-                        WindowView().openInWindow(title: "Win View", sender: self)
+                    HStack {
+                        Spacer()
+                        
+                        // Open window to view data graph
+                        Button("Open Graph") {
+//                            let dates = session.speedCollection!.keys.map{$0}
+//                            let speeds = session.speedCollection!.values.map{$0}
+                            
+                            WindowView(session: session)
+                                .openInWindow(title: "Network Speed Monitor", sender: self)
+                        }
+                        .padding(.top)
+                        Spacer()
                     }
                     
                     Divider()
+                    
+                    
                 }
             }
            
