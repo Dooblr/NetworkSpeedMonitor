@@ -24,7 +24,7 @@ struct TabContainerView: View {
                     Text("Sessions")
                 }
         }
-        .frame(minWidth:350, minHeight:500)
+        .frame(minWidth:350, minHeight:400)
     }
 }
 

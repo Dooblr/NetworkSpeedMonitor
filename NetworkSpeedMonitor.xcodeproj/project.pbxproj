@@ -13,6 +13,7 @@
 		84059C9727532614009296AC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C9627532614009296AC /* MainViewController.swift */; };
 		84059C9827532852009296AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84059C9527532611009296AC /* Main.storyboard */; };
 		84059C9C27533095009296AC /* TabContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84059C9B27533095009296AC /* TabContainerView.swift */; };
+		84824ABF27634933009B8A26 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 84824ABE27634933009B8A26 /* SwiftUICharts */; };
 		84A87B2F2751E89D0015862E /* NetworkSpeedMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B2E2751E89D0015862E /* NetworkSpeedMonitorApp.swift */; };
 		84A87B312751E89D0015862E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B302751E89D0015862E /* TestView.swift */; };
 		84A87B332751E8A00015862E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A87B322751E8A00015862E /* Assets.xcassets */; };
@@ -23,7 +24,6 @@
 		84A87B482751ED360015862E /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A87B472751ED360015862E /* DataViewModel.swift */; };
 		84BD8027276083170028D06F /* WindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BD8026276083170028D06F /* WindowView.swift */; };
 		84BD802A27609ED50028D06F /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BD802927609ED50028D06F /* Styles.swift */; };
-		84BD802D2760A9DA0028D06F /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 84BD802C2760A9DA0028D06F /* SwiftUICharts */; };
 		84EE90DE27533C480028F5FA /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DD27533C480028F5FA /* HelperFunctions.swift */; };
 		84EE90E027533D480028F5FA /* SessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EE90DF27533D480028F5FA /* SessionView.swift */; };
 		84FB799427559A7D002BEC96 /* ExportDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB799327559A7D002BEC96 /* ExportDataModel.swift */; };
@@ -59,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84BD802D2760A9DA0028D06F /* SwiftUICharts in Frameworks */,
+				84824ABF27634933009B8A26 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +183,7 @@
 			);
 			name = NetworkSpeedMonitor;
 			packageProductDependencies = (
-				84BD802C2760A9DA0028D06F /* SwiftUICharts */,
+				84824ABE27634933009B8A26 /* SwiftUICharts */,
 			);
 			productName = NetworkSpeedMonitor;
 			productReference = 84A87B2B2751E89D0015862E /* NetworkSpeedMonitor.app */;
@@ -214,7 +214,7 @@
 			);
 			mainGroup = 84A87B222751E89D0015862E;
 			packageReferences = (
-				84BD802B2760A9DA0028D06F /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+				84824ABD27634933009B8A26 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 84A87B2C2751E89D0015862E /* Products */;
 			projectDirPath = "";
@@ -386,6 +386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NetworkSpeedMonitor/NetworkSpeedMonitor.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -414,6 +415,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = NetworkSpeedMonitor/NetworkSpeedMonitor.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -460,20 +462,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		84BD802B2760A9DA0028D06F /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+		84824ABD27634933009B8A26 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AfrazCodes/SwiftUICharts";
+			repositoryURL = "https://github.com/willdale/SwiftUICharts";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.2;
+				kind = exactVersion;
+				version = 2.9.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		84BD802C2760A9DA0028D06F /* SwiftUICharts */ = {
+		84824ABE27634933009B8A26 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84BD802B2760A9DA0028D06F /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			package = 84824ABD27634933009B8A26 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
 			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */

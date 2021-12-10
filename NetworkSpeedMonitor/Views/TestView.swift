@@ -54,8 +54,6 @@ struct TestView: View {
                 }
                 .padding([.leading])
                 
-                
-                
                 if testViewModel.networkAverage != nil {
                     Divider()
                     
@@ -107,6 +105,16 @@ struct TestView: View {
                     }
                     .disabled((testViewModel.sessionIsRunning == false) ? true : false)
                     .padding()
+                }
+                
+                HStack {
+                    Spacer()
+                    Button {
+                        NSApplication.shared.terminate(self)
+                    } label: {
+                        Text("Quit")
+                    }
+
                 }
                 
             }

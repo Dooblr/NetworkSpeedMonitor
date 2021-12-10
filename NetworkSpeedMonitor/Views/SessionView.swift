@@ -14,8 +14,6 @@ struct SessionView: View {
     
     // Toggles delete buttons to "are you sure" before deleting
     @State var isShowingDeleteSessionsAlert = false
-//    @State var isShowingDeleteSessionAlert = false
-//    @State var isShowingDeleteHash:Int?
     
     // Collection of selected items
     @State var selectedSessions:[SessionEntity] = []
@@ -61,31 +59,23 @@ struct SessionView: View {
                         
                         Spacer()
                         
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        
-                        // Open window to view data graph
-                        Button("Open Graph") {
-//                            let dates = session.speedCollection!.keys.map{$0}
-//                            let speeds = session.speedCollection!.values.map{$0}
-                            
+                        Button {
                             WindowView(session: session)
                                 .openInWindow(title: "Network Speed Monitor", sender: self)
+                        } label: {
+                            Image(systemName: "chart.bar.xaxis")
+                                
                         }
-                        .padding(.top)
-                        Spacer()
+                        .padding()
+                        .foregroundColor(.white)
+                        
                     }
-                    
                     Divider()
-                    
-                    
                 }
             }
            
             
-            // MARK: - Buttons
+            // MARK: - Export & Delete Buttons
             
             VStack {
                 // Export all or selected sessions to file
@@ -150,10 +140,11 @@ struct SessionView: View {
                         }
                     }
                 }
-                .padding()
             }
+            .padding(EdgeInsets(top: 5, leading: 0, bottom: 10, trailing: 0))
             .disabled(dataModel.savedEntities.isEmpty ? true : false)
             .opacity(dataModel.savedEntities.isEmpty ? 0.3 : 1.0)
+            .foregroundColor(.white)
         }.onAppear {
             // Fetches coredata items and updates published sessions to view
             dataModel.fetchContent()
