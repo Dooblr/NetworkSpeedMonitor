@@ -81,4 +81,18 @@ struct HelperFuctions {
         //Output: Pm
         */
     }
+    
+    
+}
+
+extension Array {
+    
+    func evenlySpaced(length: Int) -> [Element] {
+        guard length < self.count else { return self }
+        
+        let takeIndex = (self.count / length) - 1
+        let nextArray = Array(self.dropFirst(takeIndex + 1))
+        return [self[takeIndex]] + nextArray.evenlySpaced(length: length - 1)
+    }
+    
 }

@@ -13,12 +13,14 @@ struct WindowView: View {
     // The session from which data will be pulled to populate graph
     var session: SessionEntity
     
+//    var chartProtocol:CTLineBarChartDataProtocol.XLabels = ["1","2","3"]
+    
     var body: some View {
         
         VStack {
             
             // Create a SwiftUICharts dataset from the supplied session data
-            let data = getData(session)
+            var data = getData(session)
             
             LineChart(chartData: data)
                 .xAxisGrid(chartData: data)
@@ -55,16 +57,20 @@ struct WindowView: View {
         return formatter
     }
     
+    // Takes a CoreData session and returns a LineChartData instance to populate the graph window
     func getData(_ session:SessionEntity) -> LineChartData {
         
         // Create an array for data points
         var dataPoints:[LineChartDataPoint] = []
+        
         // Loop through session
         for item in session.speedCollection! {
+            
             // Format the date
-            let date = HelperFuctions.formatDate(date: item.key, format: "hh:mm")
-            // Create data point
-            let sessionPoint = LineChartDataPoint(value: Double(item.value),
+            let date = HelperFuctions.formatDate(date: item.keys.first!, format: "hh:mm")
+            
+            // Create linechart data point
+            let sessionPoint = LineChartDataPoint(value: Double(item.values.first!),
                                                   xAxisLabel: date,
                                                   description: nil,
                                                   date: nil,
@@ -73,12 +79,30 @@ struct WindowView: View {
             dataPoints.append(sessionPoint)
         }
         
+        // Downsample data points if over 100
+        if dataPoints.count > 100 {
+            dataPoints = dataPoints.evenlySpaced(length: 100)
+        }
+        
+        // Default to using data for label source
+        var labelSource = LabelsFrom.dataPoint(rotation: .degrees(0))
+        
+        // Truncate labels if more than 7
+        var truncatedxAxisLabels:[String] = []
+        if dataPoints.count > 7 {
+            labelSource = LabelsFrom.chartData(rotation: .degrees(0))
+            for point in dataPoints {
+                truncatedxAxisLabels.append(point.xAxisLabel ?? "")
+            }
+            truncatedxAxisLabels = truncatedxAxisLabels.evenlySpaced(length: 7)
+        }
+        
         let data = LineDataSet(dataPoints: dataPoints,
                                legendTitle: "Network Speed",
                                pointStyle: PointStyle(),
                                style: LineStyle(lineColour: ColourStyle(colour: .blue), lineType: .curvedLine))
         
-        let gridStyle = GridStyle(numberOfLines: 1,
+        let gridStyle = GridStyle(numberOfLines: 3,
                                    lineColour   : Color(.lightGray).opacity(0.5),
                                    lineWidth    : 1,
                                    dash         : [8],
@@ -94,7 +118,7 @@ struct WindowView: View {
                                         xAxisGridStyle      : gridStyle,
                                         xAxisLabelPosition  : .bottom,
                                         xAxisLabelColour    : Color.primary,
-                                        xAxisLabelsFrom     : .dataPoint(rotation: .degrees(0)),
+                                        xAxisLabelsFrom     : labelSource,
                                         xAxisTitle          : "Time",
                                         
                                         yAxisGridStyle      : gridStyle,
@@ -108,9 +132,20 @@ struct WindowView: View {
                                         globalAnimation     : .easeOut(duration: 1))
         
         
+        // Subtitle is start and end dates
+        var subTitle:String {
+            let startDate = (session.speedCollection!.first!.keys.first)!
+            let endDate = (session.speedCollection!.last!.keys.first)!
+            
+            let startDateFormatted = HelperFuctions.formatDate(date: startDate, format: "MMM d, yyyy h:mm a")
+            let endDateFormatted = HelperFuctions.formatDate(date: endDate, format: "MMM d, yyyy h:mm a")
+            
+            return "Started: \(startDateFormatted) \nFinished: \(endDateFormatted)"
+        }
         
         let chartData = LineChartData(dataSets       : data,
-                                      metadata       : ChartMetadata(title: "Network Speed"),
+                                      metadata       : ChartMetadata(title: "Network Speed",subtitle: subTitle),
+                                      xAxisLabels    : truncatedxAxisLabels,
                                       chartStyle     : chartStyle)
         
 //        defer {

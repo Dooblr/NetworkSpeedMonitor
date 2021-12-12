@@ -26,9 +26,10 @@ struct SessionView: View {
             List {
                 ForEach(dataModel.savedEntities, id:\.self) { session in
                     
-                    let dates = getStartAndEndDates(session: session)
-                    let startDate = dates.startDate
-                    let endDate = dates.endDate
+                    let startDate = session.speedCollection?.first!.keys.first
+                    let startDateFormatted = HelperFuctions.formatDate(date: startDate!, format: "MMM d, yyyy h:mm a")
+                    let endDate = session.speedCollection?.last!.keys.first
+                    let endDateFormatted = HelperFuctions.formatDate(date: endDate!, format: "MMM d, yyyy h:mm a")
                     
                     HStack {
                         
@@ -41,8 +42,8 @@ struct SessionView: View {
                         
                         // Session Display
                         VStack (alignment: .leading) {
-                            Text(("Start date: \(startDate)"))
-                            Text(("End date: \(endDate)"))
+                            Text(("Start date: \(startDateFormatted)"))
+                            Text(("End date: \(endDateFormatted)"))
                             Text("Average speed: \(String(format:"%.2f",session.speedAverage)) Mb/s")
                             Text("Expected speed: \(String(format:"%.0f",session.speedExpected)) Mb/s")
                         }.onTapGesture {
@@ -68,7 +69,6 @@ struct SessionView: View {
                         }
                         .padding()
                         .foregroundColor(.white)
-                        
                     }
                     Divider()
                 }
@@ -146,7 +146,7 @@ struct SessionView: View {
             .opacity(dataModel.savedEntities.isEmpty ? 0.3 : 1.0)
             .foregroundColor(.white)
         }.onAppear {
-            // Fetches coredata items and updates published sessions to view
+            // Ensures fetching of coredata items and updates published sessions to view
             dataModel.fetchContent()
         }
     }
@@ -161,11 +161,15 @@ struct SessionView: View {
         
         // Append the export collection to text
         for session in collectionToExport! {
-            let dates = getStartAndEndDates(session: session)
-            let startDate = dates.startDate
-            let endDate = dates.endDate
-            text.append("Start date: \(startDate)\n")
-            text.append("End date: \(endDate)\n")
+//            let dates = getStartAndEndDates(session: session)
+//            let startDate = dates.startDate
+//            let endDate = dates.endDate
+            let startDate = session.speedCollection?.first?.keys.first
+            let startDateFormatted = HelperFuctions.formatDate(date:startDate!,format:"MMM d, yyyy h:mm a")
+            let endDate = session.speedCollection?.first?.keys.first
+            let endDateFormatted = HelperFuctions.formatDate(date:endDate!,format:"MMM d, yyyy h:mm a")
+            text.append("Start date: \(startDateFormatted)\n")
+            text.append("End date: \(endDateFormatted)\n")
             text.append("Average speed: \(String(format:"%.2f",session.speedAverage)) Mb/s \n")
             text.append("Expected speed: \(String(format:"%.0f",session.speedExpected)) Mb/s \n ")
             text.append("----------------------------------\n")
@@ -195,21 +199,21 @@ struct SessionView: View {
     }
 
     // Takes a session entity, sorts the network speeds by date, and returns the start and end dates of the test
-    func getStartAndEndDates(session:SessionEntity) -> (startDate: String, endDate: String) {
-        
-        // Create a new dict sorted by time
-        let sortedSpeeds = session.speedCollection?.sorted{ $0.key < $1.key }
-        
-        // Get start date and format
-        let startDate = sortedSpeeds?.first?.key
-        let startDateFormatted = HelperFuctions.formatDate(date:startDate!,format:"MMM d, yyyy h:mm a")
-        
-        // Get end date and format
-        let endDate = sortedSpeeds?.last?.key
-        let endDateFormatted = HelperFuctions.formatDate(date:endDate!,format:"MMM d, yyyy h:mm a")
-        
-        return (startDateFormatted, endDateFormatted)
-    }
+//    func getStartAndEndDates(session:SessionEntity) -> (startDate: String, endDate: String) {
+//
+//        // Create a new dict sorted by time
+//        let sortedSpeeds = session.speedCollection?.sorted{ $0.key < $1.key }
+//
+//        // Get start date and format
+//        let startDate = sortedSpeeds?.first?.key
+//        let startDateFormatted = HelperFuctions.formatDate(date:startDate!,format:"MMM d, yyyy h:mm a")
+//
+//        // Get end date and format
+//        let endDate = sortedSpeeds?.last?.key
+//        let endDateFormatted = HelperFuctions.formatDate(date:endDate!,format:"MMM d, yyyy h:mm a")
+//
+//        return (startDateFormatted, endDateFormatted)
+//    }
 }
 
 

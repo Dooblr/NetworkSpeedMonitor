@@ -34,7 +34,7 @@ class DataViewModel: ObservableObject {
         }
     }
     
-    func addItem(speedCollection:[Date:Float], speedExpected:Float) {
+    func addItem(speedCollection:[[Date:Float]], speedExpected:Float) {
 
         // Create a new CoreData entity
         let newItem = SessionEntity(context: container.viewContext)
@@ -47,8 +47,11 @@ class DataViewModel: ObservableObject {
         
         // Average all values in passed networkSpeeds
         var networkSpeedsArray:[Float] = []
-        for (_,value) in speedCollection {
-            networkSpeedsArray.append(value)
+        for item in speedCollection {
+            guard item.values.first != nil else {
+                continue
+            }
+            networkSpeedsArray.append(item.values.first!)
         }
         let networkSpeedAverage = HelperFuctions.arrayAverage(networkSpeedsArray)
         // Set entity's network speed average

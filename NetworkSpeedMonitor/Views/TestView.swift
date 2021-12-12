@@ -69,7 +69,7 @@ struct TestView: View {
                     
                     Text("Average Speed:")
                     
-                    if testViewModel.speedCollection == [:] && testViewModel.sessionIsRunning == true {
+                    if testViewModel.speedCollection == [[:]] && testViewModel.sessionIsRunning == true {
                         Text("Starting first test...")
                             .font(.title2)
                             .padding(5)

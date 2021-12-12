@@ -11,35 +11,34 @@ class TestViewModel: ObservableObject {
     
     let dataModel = DataViewModel()
     
-    // Toggles opening a window
-    @Published var sessionWindowIsOpen = false
-    
     // MARK: - Test Settings
     
-    // Expected network speed in Mb/s
-    @Published var speedExpected = 100
+    // View
+        // Expected network speed in Mb/s
+        @Published var speedExpected = 100
+
+        // Number of tests
+        @Published var hoursToTest = 24
+        
+        // Current average during test
+        @Published var networkAverage:Float?
     
-    // Mutable timer counter
-    var testCount = 0
+    // Math
+        // Mutable timer counter
+        var testCount = 0
+        // Number of tests to run
+        private lazy var testTotal = 360 * hoursToTest
+        // Seconds between tests
+        var testFrequency = 10
     
-    // Number of tests
-    @Published var hoursToTest = 24
-    
-    lazy var testTotal = 360 * hoursToTest
-    
-    // Seconds between tests
-    var testFrequency = 10
-    
+    // Image asset used to test speed
     let testURL = "https://upload.wikimedia.org/wikipedia/commons/a/a6/Brandenburger_Tor_abends.jpg"
     //"https://g.foolcdn.com/image/?url=https%3A//g.foolcdn.com/editorial/images/654166/shiba-inu-shib-doge-dogecoin-token-coin-cryptocurrency-digital-blockchain-technology-invest-getty.jpg&w=2000&op=resize"
     
     // MARK: - Data
     
     // Dict to hold network speeds to be averaged with key as a Date
-    var speedCollection:[Date:Float] = [:]
-    
-    // Current average during test
-    @Published var networkAverage:Float?
+    var speedCollection:[[Date:Float]] = [[:]]
     
     
     // MARK: - Toggles
@@ -78,12 +77,18 @@ class TestViewModel: ObservableObject {
             print("Speed snapshot: \(speedSnapshot) Mb/sec")
             
             // Add speed snapshot to network speeds array
-            self.speedCollection.updateValue(speedSnapshot.first!.value, forKey: speedSnapshot.first!.key)
+            self.speedCollection.append(speedSnapshot)
+            // remove any empty items added (bug??)
+            for (index,item) in self.speedCollection.enumerated() {
+                if item == [:] {
+                    self.speedCollection.remove(at: index)
+                }
+            }
             
             // Create a new float array to average network speeds
             var tempNetworkSpeeds:[Float] = []
-            for (_,value) in self.speedCollection {
-                tempNetworkSpeeds.append(value)
+            for (_, snapshot) in self.speedCollection.enumerated() {
+                tempNetworkSpeeds.append(snapshot.values.first!)
             }
             
             // Average network speeds
@@ -93,8 +98,6 @@ class TestViewModel: ObservableObject {
             // End timer and print final result
             if self.testCount == self.testTotal {
                 timer.invalidate()
-//                print("Finished")
-//                print("Final Average speed: \(self.networkAverage!) Mb/sec")
                 
                 self.sessionIsRunning = false
             }
@@ -102,7 +105,7 @@ class TestViewModel: ObservableObject {
     }
     
     // Runs one test and returns a dict of date and speed
-    func testSpeed() -> [Date:Float]  {
+    func testSpeed() -> [Date:Float] {
         
         // Create a dispatch group
         let group = DispatchGroup()
@@ -139,7 +142,9 @@ class TestViewModel: ObservableObject {
         
         group.wait()
         
+        
         return [startTime:networkSpeed!]
+        
     }
     
     func stopTest(){
@@ -158,7 +163,7 @@ class TestViewModel: ObservableObject {
         self.sessionIsRunning = false
         
         // Resets the in-memory network speeds
-        self.speedCollection = [:]
+        self.speedCollection = [[:]]
         
         // Reset published average
         self.networkAverage = nil
@@ -166,7 +171,7 @@ class TestViewModel: ObservableObject {
     }
     
     // Creates a CoreData Session with a Dict[Date:Speed/Float]
-    func createSession(speedCollection: [Date:Float], speedExpected:Float) {
+    func createSession(speedCollection: [[Date:Float]], speedExpected:Float) {
         self.dataModel.addItem(speedCollection: speedCollection,
                                speedExpected: speedExpected)
     }
