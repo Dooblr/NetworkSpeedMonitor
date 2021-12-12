@@ -20,7 +20,7 @@ struct WindowView: View {
         VStack {
             
             // Create a SwiftUICharts dataset from the supplied session data
-            var data = getData(session)
+            let data = getData(session)
             
             LineChart(chartData: data)
                 .xAxisGrid(chartData: data)
